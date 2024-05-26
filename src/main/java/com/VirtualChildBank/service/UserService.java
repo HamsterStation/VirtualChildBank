@@ -6,7 +6,7 @@ import com.VirtualChildBank.model.User;
 import java.util.List;
 
 public class UserService {
-    private UserDao userDao;
+    private static UserDao userDao;
     private static User currentUser; // 静态变量存储当前用户
 
 
@@ -15,7 +15,7 @@ public class UserService {
     }
 
     // 验证用户登录
-    public boolean authenticate(String username, String password) {
+    public static boolean authenticate(String username, String password) {
         List<User> users = userDao.getUsersFromJson();
         if (users == null) {
             return false;
@@ -27,6 +27,13 @@ public class UserService {
             }
         }
         return false;
+    }
+
+
+    // 更新用户信息并重新计算总余额
+    public void updateUserAndRecalculateBalance(User user) {
+        user.calculateTotalBalance(); // 重新计算总余额
+        userDao.saveUser(user); // 保存更新后的用户信息
     }
 
     // 用户注册方法
