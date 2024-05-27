@@ -4,6 +4,8 @@ public class Task {
     String taskContent;
     double taskPrice;
 
+    public Task() {}
+
     public Task(String taskContent, double taskPrice) {
         this.taskContent = taskContent;
         this.taskPrice = taskPrice;
