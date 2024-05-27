@@ -14,6 +14,10 @@ public class UserService {
         this.userDao = new UserDao(); // 确保 UserDao 被正确初始化
     }
 
+    public UserService(UserDao userDao) {
+        this.userDao = userDao; // 通过构造函数注入 UserDao
+    }
+
     // 验证用户登录
     public static boolean authenticate(String username, String password) {
         List<User> users = userDao.getUsersFromJson();
